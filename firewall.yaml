@@ -6,3 +6,4 @@
       - 4545
   roles:
     - firewall
+    - win_template

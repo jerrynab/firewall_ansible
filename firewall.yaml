@@ -1,4 +1,6 @@
 - name: Configure OS firewall
   hosts: all
+  vars:
+    allowed_ports: 5085,4545
   roles:
     - firewall

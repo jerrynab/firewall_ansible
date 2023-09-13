@@ -1,0 +1,5 @@
+- name: Create a file from a Jinja2 template  
+  ansible.windows.win_template:    
+    src: file.txt.j2    
+    dest: C:\Temp\file.txt
+  when: system_os == "Windows"

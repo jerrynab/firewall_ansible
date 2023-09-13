@@ -1,0 +1,39 @@
+---
+- name: Determine OS
+  set_fact:
+    system_os: "{{ ansible_os_family }}"
+    allowed_ports: "{{ ports | default('') }}"
+
+- name: Execute command for Ubuntu
+  community.general.ufw:
+    state: enabled
+    policy: allow
+  when: system_os == "Debian" # Ansible recognizes Ubuntu as Debian family
+
+- name: Open port on Ubuntu
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items: "{{ allowed_ports.split(',')}}"
+  when: system_os == "Debian" # Ansible recognizes Ubuntu as Debian family
+
+- name: Restart ssh
+  service:
+    name: ssh
+    state: restarted
+  when: system_os == "Debian" # Ansible recognizes Ubuntu as Debian family
+
+
+- name: Execute command for Windows
+  win_firewall_rule:
+    name: Allow Port {{ item }}
+    localport: "{{ item }}"
+    direction: in
+    protocol: tcp
+    action: allow
+    enabled: yes
+  with_items: "{{ allowed_ports.split(',') }}"
+  when: system_os == "Windows"
+

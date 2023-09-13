@@ -1,0 +1,6 @@
+- name: Configure OS firewall
+  hosts: all
+  vars_files:
+    - secret.yml
+  roles:
+    - firewall

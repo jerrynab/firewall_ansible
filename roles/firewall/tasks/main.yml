@@ -4,17 +4,16 @@
     system_os: "{{ ansible_os_family }}"
     allowed_ports: "{{ ports | default('') }}"
     
-- name: Allow everything and enable UFW
-  ufw:
-    state: enabled
-    policy: allow
-- name: Open port on Ubuntu
-  become: true
-  ufw:
-    rule: allow
-    port: "{{ port }}"
-    proto: tcp
-
+- name: Allow incoming TCP ports for SMTP
+  become: yes
+  iptables:
+    chain: INPUT
+    protocol: TCP
+    destination_port: "{{ item }}"
+    jump: ACCEPT
+    state: present
+  with_items: "{{ allowed_ports.split(',') }}"
+  
 - name: Restart ssh
   service:
     name: ssh

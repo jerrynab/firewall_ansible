@@ -13,11 +13,13 @@
     jump: ACCEPT
     state: present
   loop: "{{ allowed_ports }}"
+  when: system_os == "Debian"
   
 - name: Restart ssh
   service:
     name: ssh
     state: restarted
+  when: system_os == "Debian"
 
 
 

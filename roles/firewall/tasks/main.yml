@@ -20,6 +20,7 @@
     name: ssh
     state: restarted
   when: system_os == "Debian"
+  
 - name: Execute command for Windows
   win_firewall_rule:
     name: Allow Port {{ item }}

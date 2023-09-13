@@ -12,7 +12,7 @@
     destination_port: "{{ item }}"
     jump: ACCEPT
     state: present
-  with_items: "{{ allowed_ports.split(',') }}"
+  loop: "{{ allowed_ports }}"
   
 - name: Restart ssh
   service:

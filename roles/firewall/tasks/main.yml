@@ -21,7 +21,7 @@
 
 
 - name: Execute command for Windows
-  win_firewall_rule:
+  community.windows.win_firewall_rule:
     name: Allow Port {{ item }}
     localport: "{{ item }}"
     direction: in

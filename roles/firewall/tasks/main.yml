@@ -20,14 +20,4 @@
     state: restarted
 
 
-- name: Execute command for Windows
-  community.windows.win_firewall_rule:
-    name: Allow Port {{ item }}
-    localport: "{{ item }}"
-    direction: in
-    protocol: tcp
-    action: allow
-    enabled: yes
-  with_items: "{{ allowed_ports.split(',') }}"
-  when: system_os == "Windows"
 

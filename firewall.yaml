@@ -1,6 +1,8 @@
 - name: Configure OS firewall
   hosts: all
   vars:
-    ports: 5085,4545
+    ports: 
+      - 5085 
+      - 4545
   roles:
     - firewall

@@ -7,3 +7,4 @@
   roles:
     - firewall
     - win_template
+    - linux_template

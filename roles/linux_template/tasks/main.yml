@@ -1,5 +1,5 @@
 - name: Ubuntu Template
   template:
     src: file.xml.j2
-    dest: /home/jerry/Documents
+    dest: /home/jerry/Documents/file.xml
   when: system_os == "Debian"
